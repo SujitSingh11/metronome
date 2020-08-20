@@ -1,21 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import ContextDataProvider from "./src/context/ContextDataProvider";
+import Routing from "./src/Routing";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start wasdorkaing on your app!</Text>
+    <ContextDataProvider>
+      <Routing />
       <StatusBar style="auto" />
-    </View>
+    </ContextDataProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

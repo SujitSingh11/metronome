@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 
-// Context Created : It will help us communicate with the nested component in our application
+// Context Created: It will help us communicate with the nested component in our application
 const Context = React.createContext();
 
-// Reducer : Fancy word but it function is just a switch statement based on the dispatched action type
+// Reducer: Fancy word but it function is just a switch statement based on the dispatched action type
 const reducer = (state, action) => {
   switch (action.type) {
     case "value":
