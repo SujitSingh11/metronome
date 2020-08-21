@@ -1,15 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-// Data Context
-import Context from "../context/ContextDataProvider";
-
-const Main = (props) => {
-  const { state } = useContext(Context);
-
+const Library = () => {
   return (
     <View style={styles.container}>
-      <Text>Main App</Text>
+      <Text>Library</Text>
     </View>
   );
 };
@@ -23,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default Library;

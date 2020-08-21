@@ -13,12 +13,12 @@ const reducer = (state, action) => {
   }
 };
 
-const ContextDataProvider = () => {
+export const ContextDataProvider = ({ children }) => {
   // useReducer Hook: React's own global state management solution, it's bit easier to use rather than redux/flux
   const [state, dispatch] = useReducer(reducer, {
     /* Initail State */
+    test: "test",
   });
-
   // Actions: Here we will write our actions and use dispatch function which we got from the useReducer Hook, which will then call the reducer with apporiate action type and payload
 
   /* ACTIONS */
@@ -27,4 +27,4 @@ const ContextDataProvider = () => {
   return <Context.Provider value={{ state }}>{children}</Context.Provider>;
 };
 
-export default ContextDataProvider;
+export default Context;
