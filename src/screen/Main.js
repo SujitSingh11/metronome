@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 // Data Context
 import Context from "../context/ContextDataProvider";
 
-const Main = (props) => {
+const Main = () => {
   const { state } = useContext(Context);
 
   return (

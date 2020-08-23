@@ -9,6 +9,7 @@ export default function App() {
     <NavigationContainer>
       <ContextDataProvider>
         <Routing />
+        <StatusBar style="auto" />
       </ContextDataProvider>
     </NavigationContainer>
   );
