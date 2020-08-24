@@ -1,32 +1,32 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
+
+import { reducer } from "./reducer";
 
 // Context Created: It will help us communicate with the nested component in our application
 const Context = React.createContext();
 
-// Reducer: Fancy word but it function is just a switch statement based on the dispatched action type
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "INC_BPM":
-      return {
-        ...state,
-        bpm: state.bpm + action.payload,
-      };
-    case "DEC_BPM":
-      return {
-        ...state,
-        bpm: state.bpm - action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
 export const ContextDataProvider = ({ children }) => {
-  // useReducer Hook: React's own global state management solution, it's bit easier to use rather than redux/flux
-  const [state, dispatch] = useReducer(reducer, {
-    /* Initail State */
-    bpm: 50,
-  });
+  const initialState = { bpm: 50 };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    readItemFromStorage();
+  }, []);
+
+  const readItemFromStorage = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("@APP_STATE");
+
+      return dispatch({
+        type: "FETCH_STORAGE",
+        payload: jsonValue != null ? JSON.parse(jsonValue) : null,
+      });
+    } catch (e) {
+      // error reading value
+      console.warn(e);
+    }
+  };
 
   // Actions: Here we will write our actions and use dispatch function which we got from the useReducer Hook, which will then call the reducer with apporiate action type and payload
 

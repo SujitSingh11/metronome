@@ -6,7 +6,6 @@ import Context from "../context/ContextDataProvider";
 
 const Main = () => {
   const { state, increaseBPM, decreaseBPM } = useContext(Context);
-
   return (
     <View style={styles.container}>
       <Text>BPM: {state.bpm}</Text>
