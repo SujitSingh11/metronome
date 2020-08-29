@@ -38,9 +38,12 @@ export const ContextDataProvider = ({ children }) => {
     return dispatch({ type: "DEC_BPM", payload: decrement });
   };
 
+  const changeBPM = (value) => {
+    return dispatch({ type: "CHANGE_BPM", payload: value });
+  };
   // Context Provider: This is the higher order component which will wrap over our App so we will have access to the passed value property. Here childern will be our app component
   return (
-    <Context.Provider value={{ state, increaseBPM, decreaseBPM }}>
+    <Context.Provider value={{ state, increaseBPM, decreaseBPM, changeBPM }}>
       {children}
     </Context.Provider>
   );

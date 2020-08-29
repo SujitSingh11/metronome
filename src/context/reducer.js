@@ -33,6 +33,15 @@ export const reducer = (state, action) => {
         ...state,
         bpm: state.bpm - action.payload,
       };
+    case "CHANGE_BPM":
+      writeItemToStorage({
+        ...state,
+        bpm: action.payload,
+      });
+      return {
+        ...state,
+        bpm: action.payload,
+      };
     default:
       return state;
   }
