@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Slider from "@react-native-community/slider";
 
@@ -6,7 +6,11 @@ import Slider from "@react-native-community/slider";
 import Context from "../context/ContextDataProvider";
 
 const Main = () => {
-  const { state, increaseBPM, decreaseBPM, changeBPM } = useContext(Context);
+  const { state, increaseBPM, decreaseBPM, changeBPM, togglePlay } = useContext(
+    Context
+  );
+  console.log(state);
+
   return (
     <View style={styles.container}>
       <View style={styles.cardView}></View>
@@ -16,8 +20,8 @@ const Main = () => {
           onValueChange={(value) => {
             changeBPM(value);
           }}
-          maximumValue={150}
-          minimumValue={50}
+          maximumValue={220}
+          minimumValue={40}
           step={1}
           style={styles.slider}
           minimumTrackTintColor="#212121"
@@ -45,7 +49,12 @@ const Main = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.buttonPlay} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.buttonPlay}
+          onPress={() => {
+            togglePlay();
+          }}
+        >
           <Text>Play</Text>
         </TouchableOpacity>
       </View>
