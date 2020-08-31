@@ -10,7 +10,6 @@ const Main = () => {
     Context
   );
   console.log(state);
-
   return (
     <View style={styles.container}>
       <View style={styles.cardView}></View>

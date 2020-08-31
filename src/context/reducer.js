@@ -22,23 +22,23 @@ export const reducer = (state, action) => {
     case "INC_BPM":
       writeItemToStorage({
         ...state,
-        bpm: state.bpm + action.payload,
+        bpm: state.bpm >= 220 ? 220 : state.bpm + action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm + action.payload),
       });
       return {
         ...state,
-        bpm: state.bpm + action.payload,
+        bpm: state.bpm >= 220 ? 220 : state.bpm + action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm + action.payload),
       };
     case "DEC_BPM":
       writeItemToStorage({
         ...state,
-        bpm: state.bpm - action.payload,
+        bpm: state.bpm <= 40 ? 40 : state.bpm - action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm - action.payload),
       });
       return {
         ...state,
-        bpm: state.bpm - action.payload,
+        bpm: state.bpm <= 40 ? 40 : state.bpm - action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm - action.payload),
       };
     case "CHANGE_BPM":
