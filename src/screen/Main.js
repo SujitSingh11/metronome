@@ -1,15 +1,40 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Slider from "@react-native-community/slider";
 
 // Data Context
 import Context from "../context/ContextDataProvider";
 
+// ICONS
+import { AntDesign } from "@expo/vector-icons";
+
 const Main = () => {
   const { state, increaseBPM, decreaseBPM, changeBPM, togglePlay } = useContext(
     Context
   );
-  console.log(state);
+
+  const intervalIdRef = useRef(-1);
+
+  const startLoop = () => {
+    intervalIdRef.current = setInterval(() => {
+      console.log("Playing");
+    }, state.bpmMillisecond);
+  };
+
+  const stopLoop = () => {
+    console.log("Stopped");
+    clearInterval(intervalIdRef.current);
+  };
+
+  useEffect(() => {
+    if (state.playStatus) {
+      startLoop();
+    } else {
+      stopLoop();
+    }
+    return stopLoop;
+  }, [state.playStatus]);
+
   return (
     <View style={styles.container}>
       <View style={styles.cardView}></View>
@@ -54,7 +79,11 @@ const Main = () => {
             togglePlay();
           }}
         >
-          <Text>Play</Text>
+          <AntDesign
+            name={state.playStatus ? "pausecircleo" : "playcircleo"}
+            size={32}
+            color="black"
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -86,10 +115,9 @@ const styles = StyleSheet.create({
   buttonPlay: {
     marginTop: 15,
     backgroundColor: "#DDDDDD",
-    padding: 10,
-    width: 120,
+    padding: 15,
     alignItems: "center",
-    borderRadius: 5,
+    borderRadius: 50,
     margin: 10,
     marginBottom: 20,
   },

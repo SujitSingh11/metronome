@@ -21,7 +21,6 @@ export const reducer = (state, action) => {
       return action.payload != null ? action.payload : state;
     case "INC_BPM":
       writeItemToStorage({
-        ...state,
         bpm: state.bpm >= 220 ? 220 : state.bpm + action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm + action.payload),
       });
@@ -29,10 +28,10 @@ export const reducer = (state, action) => {
         ...state,
         bpm: state.bpm >= 220 ? 220 : state.bpm + action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm + action.payload),
+        playStatus: false,
       };
     case "DEC_BPM":
       writeItemToStorage({
-        ...state,
         bpm: state.bpm <= 40 ? 40 : state.bpm - action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm - action.payload),
       });
@@ -40,10 +39,10 @@ export const reducer = (state, action) => {
         ...state,
         bpm: state.bpm <= 40 ? 40 : state.bpm - action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm - action.payload),
+        playStatus: false,
       };
     case "CHANGE_BPM":
       writeItemToStorage({
-        ...state,
         bpm: action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm),
       });
@@ -51,6 +50,7 @@ export const reducer = (state, action) => {
         ...state,
         bpm: action.payload,
         bpmMillisecond: calculateMiliseconds(state.bpm),
+        playStatus: false,
       };
     case "TOGGLE_PLAY":
       return {
